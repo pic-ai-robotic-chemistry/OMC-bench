@@ -1,0 +1,31 @@
+data_IBUYAI
+_symmetry_space_group_name_H-M    'P1'
+_symmetry_Int_Tables_number       1
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 x,y,z
+_cell_length_a                   4.13611
+_cell_length_b                   6.422216
+_cell_length_c                   8.235219
+_cell_angle_alpha                90.0
+_cell_angle_beta                 99.5438
+_cell_angle_gamma                90.0
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+     1  I          0.78128500       0.25000000       0.11004200
+     2  I          0.21871500       0.75000000       0.88995800
+     3  O          0.84787000       0.25000000       0.77033000
+     4  O          0.15213000       0.75000000       0.22967000
+     5  C          0.71748000       0.25000000       0.34544000
+     6  C          0.28252000       0.75000000       0.65456000
+     7  C          0.67589000       0.25000000       0.48634000
+     8  C          0.32411000       0.75000000       0.51366000
+     9  C          0.62389000       0.25000000       0.65534000
+    10  C          0.37611000       0.75000000       0.34466000
+    11  H          0.40540000       0.25000000       0.67710000
+    12  H          0.59460000       0.75000000       0.32290000

@@ -1,0 +1,33 @@
+data_QEMHUO
+_symmetry_space_group_name_H-M    'P1'
+_symmetry_Int_Tables_number       1
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 x,y,z
+_cell_length_a                   6.98459
+_cell_length_b                   7.93001
+_cell_length_c                   8.551311
+_cell_angle_alpha                70.5953
+_cell_angle_beta                 76.5123
+_cell_angle_gamma                86.6493
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+     1  C          0.83501100       0.17881000       0.04871000
+     2  C          0.16498900       0.82119000       0.95129000
+     3  I          0.08491700       0.24814700       0.11258600
+     4  I          0.91508300       0.75185300       0.88741400
+     5  I          0.63933800       0.98600300       0.23944700
+     6  I          0.36066200       0.01399700       0.76055300
+     7  C          0.79561100       0.25621100       0.90051100
+     8  C          0.20438900       0.74378900       0.09948900
+     9  C          0.75321100       0.33941100       0.75561100
+    10  C          0.24678900       0.66058900       0.24438900
+    11  I          0.56829700       0.56114700       0.72448700
+    12  I          0.43170300       0.43885300       0.27551300
+    13  I          0.85954700       0.26169700       0.53956600
+    14  I          0.14045300       0.73830300       0.46043400

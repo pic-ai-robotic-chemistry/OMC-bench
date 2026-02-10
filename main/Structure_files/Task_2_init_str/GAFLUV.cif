@@ -1,0 +1,31 @@
+data_GAFLUV
+_symmetry_space_group_name_H-M    'P1'
+_symmetry_Int_Tables_number       1
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 x,y,z
+_cell_length_a                   4.9292
+_cell_length_b                   4.4522
+_cell_length_c                   6.3463
+_cell_angle_alpha                90.0
+_cell_angle_beta                 106.321
+_cell_angle_gamma                90.0
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+     1  F          0.79211120       0.24586200       0.56951800
+     2  F          0.20788880       0.74586200       0.93048200
+     3  F          0.20788880       0.75413800       0.43048200
+     4  F          0.79211120       0.25413800       0.06951800
+     5  C          0.63606110      -0.00589150       0.54939120
+     6  C          0.36393890       0.49410850       0.95060880
+     7  C          0.36393890       0.00589150       0.45060880
+     8  C          0.63606110       0.50589150       0.04939120
+     9  H          0.74087000       0.78588000       0.61778000
+    10  H          0.25913000       0.28588000       0.88222000
+    11  H          0.25913000       0.21412000       0.38222000
+    12  H          0.74087000       0.71412000       0.11778000

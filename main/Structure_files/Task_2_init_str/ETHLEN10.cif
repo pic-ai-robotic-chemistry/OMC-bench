@@ -1,0 +1,31 @@
+data_ETHLEN10
+_symmetry_space_group_name_H-M    'P1'
+_symmetry_Int_Tables_number       1
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 x,y,z
+_cell_length_a                   4.6261
+_cell_length_b                   6.6202
+_cell_length_c                   4.0672
+_cell_angle_alpha                90.0
+_cell_angle_beta                 94.392
+_cell_angle_gamma                90.0
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+     1  C          0.88344000       0.05382000       0.95925000
+     2  C          0.61656000       0.55382000       0.54075000
+     3  C          0.11656000       0.94618000       0.04075000
+     4  C          0.38344000       0.44618000       0.45925000
+     5  H          0.81310000       0.16980000       0.11850000
+     6  H          0.68690000       0.66980000       0.38150000
+     7  H          0.18690000       0.83020000       0.88150000
+     8  H          0.31310000       0.33020000       0.61850000
+     9  H          0.75700000       0.02870000       0.73110000
+    10  H          0.74300000       0.52870000       0.76890000
+    11  H          0.24300000       0.97130000       0.26890000
+    12  H          0.25700000       0.47130000       0.23110000
