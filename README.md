@@ -69,7 +69,7 @@ All scripts are fully configurable via command-line arguments.
 ```bash
 python Task_1.py \
     --xyz_file ../Structure_files/Task_1.xyz \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --output_csv ../results/task_1/eval_results.csv \
     --n_jobs 5
@@ -88,7 +88,7 @@ python Task_1.py \
 python Tasks_234_optimize.py \
     --input_dir ../Structure_files/Task_2_init_str \
     --output_dir ../results/task_2 \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --fmax 0.001 \
     --max_steps 3000 \
@@ -106,7 +106,7 @@ python Tasks_234_optimize.py \
 python Task_2_2.py \
     --input_dir ../results/task_2/optimized_xyz \
     --outdir ../results/task_2/phonon_results \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --n_jobs 12
 ```
@@ -138,7 +138,7 @@ python Task_2_3.py \
 python Tasks_234_optimize.py \
     --input_dir ../Structure_files/Task_3_init_str \
     --output_dir ../results/task_3 \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --fmax 0.01 \
     --max_steps 3000 \
@@ -173,7 +173,7 @@ python Task_3_2.py \
 python Tasks_234_optimize.py \
     --input_dir ../Structure_files/Task_4_init_str \
     --output_dir ../results/task_4 \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --compare energy \
     --ref_energy_csv ../Structure_files/Task_4_ref_energy.csv \
