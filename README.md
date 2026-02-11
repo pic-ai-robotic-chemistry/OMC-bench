@@ -8,7 +8,6 @@
 4. [Detailed Task Instructions](#4-detailed-task-instructions)
 5. [Key File Formats](#5-key-file-formats)
 6. [FAQ & Troubleshooting](#6-faq--troubleshooting)
-7. [Project Structure](#7-project-structure)
 
 ---
 
