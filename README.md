@@ -172,7 +172,7 @@ python Task_3_2.py \
 python Tasks_234_optimize.py \
     --input_dir ../Structure_files/Task_4_init_str \
     --output_dir ../results/task_4 \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --compare energy \
     --ref_energy_csv ../Structure_files/Task_4_ref_energy.csv \
