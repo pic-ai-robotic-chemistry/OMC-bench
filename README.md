@@ -7,7 +7,8 @@
 3. [Script-Task-File Mapping](#3-script-task-file-mapping)
 4. [Detailed Task Instructions](#4-detailed-task-instructions)
 5. [Key File Formats](#5-key-file-formats)
-6. [FAQ & Troubleshooting](#6-faq--troubleshooting)
+6. [Use of AtomBit](#6-AtomBIt)
+7. [FAQ & Troubleshooting](#7-faq--troubleshooting)
 
 ---
 
@@ -221,7 +222,11 @@ ABC01,-239.1,2,ABC
 
 ---
 
-## 6. FAQ & Troubleshooting
+## 6. AtomBIt
+
+How to use AtomBit has been demonstrated in the main/AtomBit-OMC-l/demo.ipynb.
+
+## 7. FAQ & Troubleshooting
 
 - **Adding/Switching Models**: Edit `calculator_defs.json` and configure the model name and path.
 - **File Format Mismatch/Missing Fields**: Please refer to "Key File Formats" to check your input format and fields.
