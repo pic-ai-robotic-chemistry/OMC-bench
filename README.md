@@ -7,7 +7,7 @@
 3. [Script-Task-File Mapping](#3-script-task-file-mapping)
 4. [Detailed Task Instructions](#4-detailed-task-instructions)
 5. [Key File Formats](#5-key-file-formats)
-6. [Use of AtomBit](#6-AtomBIt)
+6. [Use of AtomBit-OMC](#6-AtomBIt-OMC)
 7. [FAQ & Troubleshooting](#7-faq--troubleshooting)
 
 ---
