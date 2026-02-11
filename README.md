@@ -127,144 +127,77 @@ python Task_2_3.py \
 
 ---
 
-### [Task 3] Polymorph Energy Ranking & Grouping
+### [Task 3] Structure Matching (Cocrystal)
 
-#### 1. Structure Optimization
+#### 1. Batch Structure Optimization
 
-**Script**: `batch_optimize.py`
+**Script**: `Tasks_234_optimize.py`
 
 **Example Command**:
 
 ```bash
-python batch_optimize.py \
-    --input_dir Polymorph_init_str \
-    --output_dir results/task_3 \
+python Tasks_234_optimize.py \
+    --input_dir ../Structure_files/Task_3_init_str \
+    --output_dir ../results/task_3 \
     --model_name mace_mp \
-    --config_json calculator_defs.json \
+    --config_json Calculator_defs.json \
+    --fmax 0.01 \
+    --max_steps 3000 \
+    --gpus 0 1 2 3 4 5 6 7 \
+    --n_jobs 16
+```
+
+#### 2. Structure Matching
+
+**Script**: `Task_3_2.py`
+
+**Example Command**:
+
+```bash
+python Task_3_2.py \
+    --input_dir ../results/task_3/optimized_xyz \
+    --ref_dir ../Task_3_ref_cif \
+    --output ../results/task_3/metrics_summary.csv
+```
+
+---
+
+### [Task 4] Polymorph Ranking
+
+#### 1. Batch Structure Optimization
+
+**Script**: `Tasks_234_optimize.py`
+
+**Example Command**:
+
+```bash
+python Tasks_234_optimize.py \
+    --input_dir ../Structure_files/Task_4_init_str \
+    --output_dir ../results/task_4 \
+    --model_name mace_mp \
+    --config_json Calculator_defs.json \
     --compare energy \
-    --ref_energy_csv ref_energy.csv \
+    --ref_energy_csv ../Structure_files/Task_4_ref_energy.csv \
     --gpus 4 5 6 7 \
     --n_jobs 16
 ```
 
-**Input**: `Polymorph_init_str/` (.cif).
+#### 2. Polymorph Ranking
 
-**Output**: `results/task_3/optimized_xyz/`, `results/task_3/results.csv`.
-
-#### 2. Polymorph Group Ranking
-
-**Script**: `poly_ranking.py`
+**Script**: `Task_4_2.py`
 
 **Example Command**:
 
 ```bash
-python poly_ranking.py \
-    --input_dir results/task_3/individual_results/ \
-    --output results/task_3/summary_by_polymorph.json \
-    --ref_csv ref_energy.csv
+python Task_4_2.py \
+    --input_dir ../results/task_4/individual_results/ \
+    --output ../results/task_4/summary_by_polymorph.json \
+    --ref_csv ../Structure_files/Task_4_ref_energy.csv
 ```
-
-**Input**: `results/task_3/individual_results`, `ref_energy.csv`.
-
-**Output**: `results/task_3/summary_by_polymorph.json`.
-
----
-
-### [Task 4] ML Phonon/Thermodynamics/DOS Benchmarking
-
-#### 1. Structure Optimization
-
-**Script**: `batch_optimize.py`
-
-**Example Command**:
-
-```bash
-python batch_optimize.py \
-    --input_dir phonon_init_str \
-    --output_dir results/task_4 \
-    --model_name mace_mp \
-    --config_json calculator_defs.json \
-    --fmax 0.001 \
-    --max_steps 3000 \
-    --gpus 0 1 2 3 4 5 6 7 \
-    --n_jobs 16
-```
-
-**Input**: `phonon_init_str/`.
-
-**Output**: `results/task_4/optimized_xyz/`.
-
-#### 2. ML Phonon/Thermodynamics/DOS Batch Calculation
-
-**Script**: `ml_phonon_benchmark.py`
-
-**Example Command**:
-
-```bash
-python ml_phonon_benchmark.py \
-    --input_dir results/task_4/optimized_xyz \
-    --outdir results/task_4/phonon_results \
-    --model_name mace_mp \
-    --config_json calculator_defs.json \
-    --n_jobs 12
-```
-
-**Output**: `ml.yaml` and `json` files for each material under `results/task_4/phonon_results/`, and `results/task_4/phonon_results/ml_phonon_summary.csv`.
-
-#### 3. Phonon/Thermodynamics Metrics Comparison
-
-**Script**: `compare_metrics_phonon.py`
-
-**Example Command**:
-
-```bash
-python compare_metrics_phonon.py phonon_benchmark_summary_ref.csv results/task_4/phonon_results/ml_phonon_summary.csv
-```
-
-**Output**: `results/task_4/phonon_results/metrics_summary.csv`.
-
----
-
-### [Task 5] Sublimation Enthalpy Calculation Benchmarking
-
-#### 1. Structure Optimization
-
-**Script**: `batch_optimize.py`
-
-**Example Commands**:
-
-**# Gas Phase Structure Optimization #**
-```bash
-python batch_optimize.py \
-    --input_dir X23_init_str/gas \
-    --output_dir results/task_5/gas \
-    --model_name mace_mp \
-    --config_json calculator_defs.json \
-    --fmax 0.01 \
-    --max_steps 3000 \
-    --gpus 0 1 2 3 4 5 6 7 \
-    --n_jobs 16
-```
-
-**# Solid Phase Structure Optimization #**
-```bash
-python batch_optimize.py \
-    --input_dir X23_init_str/solid \
-    --output_dir results/task_5/solid \
-    --model_name mace_mp \
-    --config_json calculator_defs.json \
-    --fmax 0.01 \
-    --max_steps 3000 \
-    --gpus 0 1 2 3 4 5 6 7 \
-    --n_jobs 16
-```
-
-#### 2. Vibrational Energy Calculation
-
 
 ## 5. Key File Formats
 
-### 1) `calculator_defs.json`
+### 1) `Calculator_defs.json`
 
 ```json
 {
@@ -274,7 +207,7 @@ python batch_optimize.py \
 
 ---
 
-### 2) `ref_energy.csv`
+### 2) `Task_4_ref_energy.csv`
 
 ```
 name,ref_energy,n_mol,polymorph
@@ -297,30 +230,4 @@ ABC01,-239.1,2,ABC
 - **Task Execution**: Tasks can be run independently or sequentially; if some structures fail or are missing, the scripts will automatically skip them and output a warning/hint.
 
 ---
-
-## 7. Project Structure
-
-```
-project_root/
-├── calculator_factory.py           # Unified model loading interface
-├── calculator_defs.json            # Potential model configuration
-├── batch_optimize.py               # Structure optimization & energy
-├── calculate_RMSD_batch.py         # Batch RMSD benchmarking
-├── evaluate_general_prediction.py  # Batch Energy/Force/Stress error
-├── ml_phonon_benchmark.py          # Phonon/Thermodynamics/DOS
-├── compare_metrics_phonon.py       # Phonon/Thermodynamics comparison
-├── poly_ranking.py                 # Polymorph ranking
-├── ref_energy.csv                  # Energy/Grouping table
-├── ref_xyz/                        # Reference xyz structures
-├── evaluation.xyz                  # Multi-frame labeled xyz
-├── Cocrystal_init_str/             # Initial Cocrystal structures
-├── Polymorph_init_str/             # Initial Polymorph structures
-├── phonon_init_str/                # Initial Phonon structures
-└── results/
-    ├── task_1/
-    ├── task_2/
-    ├── task_3/
-    ├── task_4/
-    └── phonon_results/             # Phonon/Thermodynamics output
-└── phonon_benchmark_summary_ref.csv
 ```
