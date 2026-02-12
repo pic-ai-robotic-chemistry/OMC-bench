@@ -1,18 +1,10 @@
 {
-  "sevenn": {
-    "arch": "sevenn",
-    "path": "/path/to/sevenn_model.pt"
-  },
-  "mace_off": {
-    "arch": "mace_off",
-    "path": "/path/to/mace_model.pt"
-  },
   "mace_mp": {
     "arch": "mace_mp",
-    "path": "models/2023-12-10-mace-128-L0_epoch-199.model"
+    "path": "MLIP/2023-12-10-mace-128-L0_epoch-199.model"
   },
-  "lmy": {
-    "arch": "lmy",
-    "path": "no_topology/Checkpoints/model_epoch_15.pt"
+  "atombit": {
+    "arch": "atombit",
+    "path": "MLIP/Checkpoints/model_epoch_15.pt"
   }
 }
