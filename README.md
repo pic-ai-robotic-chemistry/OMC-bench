@@ -224,8 +224,8 @@ ABC01,-239.1,2,ABC
 
 ## 6. AtomBit
 
-How to use AtomBit has been demonstrated in the main/AtomBit-OMC-l/demo.ipynb.
-In addition, we also provide the AtomBit-OMC in NPU version in the main/AtomBit-MindSpore.
+- **How to use AtomBit has been demonstrated in the main/AtomBit-OMC-l/demo.ipynb.
+- **In addition, we also provide the AtomBit-OMC in NPU version in the main/AtomBit-MindSpore.
 
 ## 7. FAQ & Troubleshooting
 
