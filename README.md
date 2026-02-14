@@ -229,7 +229,7 @@ ABC01,-239.1,2,ABC
 
 ## 7. FAQ & Troubleshooting
 
-- **All benchmark results (large datasets) of MLIPs have been uploaded on "https://huggingface.co/datasets/MUUYUU/OMC-bench".
+- All benchmark results (large datasets) of MLIPs have been uploaded on "https://huggingface.co/datasets/MUUYUU/OMC-bench".
 - **Adding/Switching Models**: Edit `Calculator_defs.json` and configure the model name and path.
 - **File Format Mismatch/Missing Fields**: Please refer to "Key File Formats" to check your input format and fields.
 - **Task Execution**: Tasks can be run independently or sequentially; if some structures fail or are missing, the scripts will automatically skip them and output a warning/hint.
