@@ -7,7 +7,7 @@
 3. [Script-Task-File Mapping](#3-script-task-file-mapping)
 4. [Detailed Task Instructions](#4-detailed-task-instructions)
 5. [Key File Formats](#5-key-file-formats)
-6. [Use of AtomBit-OMC](#6-AtomBIt-OMC)
+6. [Use of AtomBit-OMC](#6-AtomBit)
 7. [FAQ & Troubleshooting](#7-faq--troubleshooting)
 
 ---
@@ -222,14 +222,14 @@ ABC01,-239.1,2,ABC
 
 ---
 
-## 6. AtomBIt
+## 6. AtomBit
 
 How to use AtomBit has been demonstrated in the main/AtomBit-OMC-l/demo.ipynb.
 In addition, we also provide the AtomBit-OMC in NPU version in the main/AtomBit-MindSpore.
 
 ## 7. FAQ & Troubleshooting
 
-- **Adding/Switching Models**: Edit `calculator_defs.json` and configure the model name and path.
+- **Adding/Switching Models**: Edit `Calculator_defs.json` and configure the model name and path.
 - **File Format Mismatch/Missing Fields**: Please refer to "Key File Formats" to check your input format and fields.
 - **Task Execution**: Tasks can be run independently or sequentially; if some structures fail or are missing, the scripts will automatically skip them and output a warning/hint.
 
