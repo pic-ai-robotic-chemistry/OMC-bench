@@ -1,0 +1,53 @@
+Geometry = VaspFormat{
+<<< "POSCAR"
+}
+
+
+Driver = GeometryOptimization{
+Optimizer = Rational {}
+MaxSteps = 800
+LatticeOpt = Yes
+FixAngles = No
+FixLengths = No No No
+Convergence = {
+    GradElem = 1.94E-004
+  }
+OutputPrefix = "geo_end"
+AppendGeometries = No
+}
+
+
+Hamiltonian = xTB {
+  Method = "GFN2-xTB"
+  SCCTolerance = 1e-6
+  MaxSCCIterations = 500
+  ConvergentSCCOnly = No
+  kPointsAndWeights = SuperCellFolding {
+    3   0   0
+    0   2   0
+    0   0   3
+    0.5 0.5 0.5
+  }
+}
+
+
+
+Parallel{ 
+  Groups = 1
+  UseOmpThreads = Yes
+  Blacs {
+    BlockSize = 64
+  }
+}
+
+
+Options {}
+
+
+Analysis {
+  CalculateForces = No
+}
+
+ParserOptions {
+  ParserVersion = 7
+}

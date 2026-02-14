@@ -1,0 +1,53 @@
+SYSTEM = NHN
+
+!Initialisation:
+ NWRITE     = 2    (Medium-level output***********************************************************************************************************************************)
+ ISTART     = 1    (Read existing wavefunction; if there)
+ INIWAV     = 1    (Random initial wavefunction; otherwise)
+
+!Parallelisation:
+ LPLANE   = .TRUE. (Real space distribution; supercells*******************************************************************************************************************)
+ NPAR     = 1      (Max is no. nodes; don't set for hybrids***************************************************************************************************************)
+ KPAR     = 4
+
+!K Points
+ KSPACING = 0.4   (*****************************************************************************************************************************************************)
+ KGAMMA   = .TRUE.     (**************************************************************************************************************************************************)
+
+!Electronic Relaxation:
+ PREC    = Normal  (Precision level***************************************************************************************************************************************)
+ LREAL   = Auto      (Projection operators: Auto-Automatic, .FALSE.-Accurate forces for phonon calculations***************************************************************)
+ ALGO    = Fast      (SCF minimisation algorithm; 38/48 combo********************************************************************************************************)
+ IALGO   = 48
+ ENMAX   = 600.0 eV  (Plane-wave cutoff***********************************************************************************************************************************)
+ NELM    = 150       (Max SCF steps***************************************************************************************************************************************)
+ NELMIN  = 4         (Min SCF steps***************************************************************************************************************************************)
+ EDIFF   = 1E-06     (SCF energy convergence; eV**************************************************************************************************************************)
+ ISPIN   = 1         (1: Closed shell DFT; 2: Spin Polarised DFT**********************************************************************************************************)
+# GGA     = PE        (PE: PBE; PS: PBEsol exchange-correlation************************************************************************************************************)
+
+!Ionic Relaxation:
+ EDIFFG  =  -1.0   (Ionic convergence; eV/AA******************************************************************************************************************************)
+ NSW     =  0     (Max ionic steps)
+ IBRION  =  -1       (Algorithm: 0-MD, 1-Quasi-New, 2-CG********************************************************************************************************************)
+ ISIF    =  3       (Stress/relaxation: 2-Ions, 3-Shape/Ions/Vol, 7-Volxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
+ ISYM    =  2       (Symmetry: 0-None; 2-GGA-ChargeDensity/Forces/StressTensor symmetrized; 3-Hybrids-Forces/StressTensor symmetrized**************************************)
+ SYMPREC =  1E-05   (Default: 1E-05xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
+ ISMEAR  =  0       (0: Gaussian smearing; -5: tetrahedron with Bloechl corrections)
+ SIGMA   =  0.05    (Smearing value in eV; metals:0.2)
+ POTIM   =  0.5     (timestep 1 fs*****************************************************************************************************************************************)
+
+!Approximate vdW Correction
+ IVDW     =  12       (0: none, 1: D2, 11: D3, 12: D3-BJ, 2: TS, 21: TS iterative Hirshfeld)
+ LCHARG = .F.
+ LWAVE = .F.
+
+! MD123123132132131
+ !MDALGO = 2
+ !TEBEG = 800
+ !MAXMIX = 40
+ !NBLOCK = 10
+ !!PMASS = 1000
+ !!PSTRESS =  0.001
+ !LCHARG = .F.
+ !LWAVE = .F.

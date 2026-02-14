@@ -1,0 +1,54 @@
+! Initialisation:
+NWRITE     = 2          ! Medium-level output
+ISTART     = 1          ! Read existing wavefunction; if there
+INIWAV     = 1          ! Random initial wavefunction; otherwise
+
+! Parallelisation:
+LPLANE     = .TRUE.     ! Real space distribution; supercells
+NPAR       = 1          ! Max is no. nodes; don't set for hybrids
+KPAR       = 4          ! K-point parallelisation
+
+! K Points:
+KSPACING   = 0.4        ! K-mesh spacing
+KGAMMA     = .TRUE.     ! Gamma point sampling
+
+! Electronic Relaxation:
+PREC       = Normal     ! Precision level
+LREAL      = Auto       ! Projection operators: Auto-Automatic
+ALGO       = Fast       ! Fast electronic algorithm
+IALGO      = 38         ! Algorithm for SCF
+ENMAX      = 600.0 eV   ! Plane-wave cutoff
+NELM       = 100        ! Max SCF steps
+NELMIN     = 5          ! Min SCF steps
+EDIFF      = 1E-06      ! SCF energy convergence (eV)
+ISPIN      = 1          ! 1: Closed shell DFT; 2: Spin-polarized DFT
+!GGA        = PE        ! Exchange-correlation functional (PE: PBE)
+!LMAXMIX   = 4         ! Angular momentum for wavefunctions
+
+! Ionic Relaxation:
+! EDIFFG    = -0.01     ! Ionic convergence (eV/Å)
+NSW        = 5000      ! Max ionic steps
+IBRION     = 0         ! Algorithm: 0-MD, 1-Quasi-New, 2-CG
+ISIF       = 3         ! Stress/relaxation: 3-Shape/Ions/Vol
+ISYM       = 0         ! Symmetry: 0-None; 2-GGA-ChargeDensity/Forces/StressTensor symmetrized
+SYMPREC    = 1E-05     ! Symmetry precision， 比如 SYMPREC = 1E-06，只有距离小于0.000001 Å的才算一样，几乎没有误差。
+ISMEAR     = 0         ! Smearing method (0: Gaussian smearing)
+SIGMA      = 0.05      ! Smearing width (eV)
+POTIM      = 1         ! Timestep (1 fs)
+
+! Approximate vdW Correction:
+IVDW       = 12        ! vdW correction method (D3-BJ)
+
+LCHARG     = .F.        ! Don't write charge density
+LWAVE      = .F.        ! Don't write wavefunctions
+
+! MD (Molecular Dynamics)
+MDALGO     = 3         ! MD algorithm (3: Velocity Verlet)
+TEBEG      = 600      ! Initial temperature (K)
+LANGEVIN_GAMMA = 10.0 10.0 10.0  ! Langevin friction coefficients for three atomic species，γ大，温度很快稳定下来，体系受控更快，采样结构“更随机”、涨落范围大。但物理动力学行为被“拖慢”，真实分子运动轨迹会被“拉住”
+LANGEVIN_GAMMA_L = 10.0   ! Langevin friction for light atoms
+MAXMIX     = 40        ! Maximum number of steps for mixing
+PSTRESS    = 10     ! Target pressure  0.1Gpa (in kBar, 1 atm = 0.001 kBar = 1 MPa = 0.0001 GPa)
+PMASS      = 1000      ! Mass of particles (optional) 控制体积变化的“惯性”
+SMASS      = 0          ! 建议先用0
+
