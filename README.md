@@ -1,6 +1,5 @@
-# <font color="#8B0000">O</font>MC-bench for machine-learned interatomic potential in <font color="#8B0000">O</font>rganic <font color="#8B0000">M</font>olecular <font color="#8B0000">C</font>rystals (<font color="#8B0000">OMC</font>s)
+# <font color="#8B0000">O</font>MC-bench for machine-learned interatomic potential in <font color="#8B0000">O</font>rganic <font color="#8B0000">M</font>olecular <font color="#8B0000">C</font>rystals (<font color="#8B0000">OMC</font>s) Website: https://aisci.ustc.edu.cn/mlip-omcs/#/.
 
-"https://aisci.ustc.edu.cn/mlip-omcs/#/"
 ## Table of Contents
 
 1. [Project Introduction](#1-project-introduction)
