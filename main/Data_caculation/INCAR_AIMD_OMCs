@@ -1,0 +1,74 @@
+! ===================== Initialization =====================
+NWRITE     = 2          ! Medium verbosity level of output
+ISTART     = 1          ! Start from existing WAVECAR if present
+INIWAV     = 1          ! Use random initial wavefunction if no WAVECAR
+
+! ===================== Parallelization =====================
+LPLANE     = .TRUE.     ! Real-space distribution (recommended for supercells)
+NPAR       = 1          ! Band parallelization (do not set for hybrid functionals)
+KPAR       = 4          ! K-point parallelization
+
+! ===================== K-Point Sampling =====================
+KSPACING   = 0.4        ! K-point mesh spacing (Å⁻¹)
+KGAMMA     = .TRUE.     ! Gamma-centered k-point mesh
+
+! ===================== Electronic Relaxation =====================
+PREC       = Normal     ! Precision level (Normal / Accurate)
+LREAL      = Auto       ! Projection operators evaluated in real space (Auto mode)
+ALGO       = Fast       ! Electronic minimization algorithm
+IALGO      = 38         ! SCF algorithm (38 corresponds to RMM-DIIS)
+ENMAX      = 600.0 eV   ! Plane-wave energy cutoff
+NELM       = 100        ! Maximum number of SCF steps
+NELMIN     = 5          ! Minimum number of SCF steps
+EDIFF      = 1E-06      ! Electronic energy convergence criterion (eV)
+ISPIN      = 1          ! 1: Non-spin-polarized; 2: Spin-polarized
+!GGA        = PE        ! Exchange-correlation functional (PE = PBE)
+!LMAXMIX    = 4         ! Angular momentum for charge-density mixing
+
+! ===================== Ionic Relaxation =====================
+!EDIFFG     = -0.01     ! Ionic force convergence criterion (eV/Å)
+NSW        = 5000       ! Maximum number of ionic steps
+IBRION     = 0          ! Ionic update algorithm: 0 = MD, 1 = Quasi-Newton, 2 = Conjugate Gradient
+ISIF       = 3          ! Relax cell shape, volume, and atomic positions
+ISYM       = 0          ! Symmetry handling (0 = off; 2 = symmetrize charge/forces/stress)
+SYMPREC    = 1E-05      ! Symmetry tolerance (Å). 
+                        ! Example: 1E-06 means atoms are considered equivalent only 
+                        ! if their distance difference is < 1e-6 Å (very strict).
+ISMEAR     = 0          ! Smearing method (0 = Gaussian smearing)
+SIGMA      = 0.05       ! Smearing width (eV)
+POTIM      = 1          ! Time step (1 fs)
+
+! ===================== van der Waals Correction =====================
+IVDW       = 12         ! DFT-D3(BJ) dispersion correction
+
+! ===================== Output Control =====================
+LCHARG     = .F.        ! Do not write CHGCAR
+LWAVE      = .F.        ! Do not write WAVECAR
+
+! ===================== Molecular Dynamics =====================
+MDALGO     = 3          ! MD algorithm (3 = Velocity Verlet)
+TEBEG      = 600        ! Initial temperature (K)
+
+LANGEVIN_GAMMA = 10.0 10.0 10.0  
+! Langevin friction coefficients for the three atomic species.
+! Larger γ → faster temperature stabilization and stronger thermostat coupling.
+! Sampling becomes more stochastic with larger fluctuations,
+! but real dynamical behavior is increasingly damped.
+
+LANGEVIN_GAMMA_L = 10.0  
+! Langevin friction coefficient for light atoms
+
+MAXMIX     = 40         ! Maximum number of electronic mixing steps
+
+PSTRESS    = 10         
+! External pressure in kBar.
+! 10 kBar = 1 GPa (since 1 kBar = 0.1 GPa).
+! 1 atm ≈ 0.001 kBar = 1 MPa = 0.0001 GPa.
+
+PMASS      = 1000       
+! Effective mass of the cell degrees of freedom (controls barostat inertia).
+! Larger value → slower volume fluctuations.
+
+SMASS      = 0          
+! Nose mass parameter for thermostat.
+! Recommended to start with 0 (automatic setting).

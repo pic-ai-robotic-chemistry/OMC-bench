@@ -1,4 +1,5 @@
-# <font color="#8B0000">O</font>MC-bench for machine-learned interatomic potential in <font color="#8B0000">O</font>rganic <font color="#8B0000">M</font>olecular <font color="#8B0000">C</font>rystals (<font color="#8B0000">OMC</font>s)
+# <font color="#8B0000">O</font>MC-bench for machine-learned interatomic potential in <font color="#8B0000">O</font>rganic <font color="#8B0000">M</font>olecular <font color="#8B0000">C</font>rystals (<font color="#8B0000">OMC</font>s) 
+- Website: https://aisci.ustc.edu.cn/mlip-omcs/#/
 
 ## Table of Contents
 
@@ -7,7 +8,8 @@
 3. [Script-Task-File Mapping](#3-script-task-file-mapping)
 4. [Detailed Task Instructions](#4-detailed-task-instructions)
 5. [Key File Formats](#5-key-file-formats)
-6. [FAQ & Troubleshooting](#6-faq--troubleshooting)
+6. [AtomBit](#6-AtomBit)
+7. [FAQ & Troubleshooting](#7-faq--troubleshooting)
 
 ---
 
@@ -68,7 +70,7 @@ All scripts are fully configurable via command-line arguments.
 ```bash
 python Task_1.py \
     --xyz_file ../Structure_files/Task_1.xyz \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --output_csv ../results/task_1/eval_results.csv \
     --n_jobs 5
@@ -87,7 +89,7 @@ python Task_1.py \
 python Tasks_234_optimize.py \
     --input_dir ../Structure_files/Task_2_init_str \
     --output_dir ../results/task_2 \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --fmax 0.001 \
     --max_steps 3000 \
@@ -105,7 +107,7 @@ python Tasks_234_optimize.py \
 python Task_2_2.py \
     --input_dir ../results/task_2/optimized_xyz \
     --outdir ../results/task_2/phonon_results \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --n_jobs 12
 ```
@@ -137,7 +139,7 @@ python Task_2_3.py \
 python Tasks_234_optimize.py \
     --input_dir ../Structure_files/Task_3_init_str \
     --output_dir ../results/task_3 \
-    --model_name mace_mp \
+    --model_name atombit_omc \
     --config_json Calculator_defs.json \
     --fmax 0.01 \
     --max_steps 3000 \
@@ -221,9 +223,15 @@ ABC01,-239.1,2,ABC
 
 ---
 
-## 6. FAQ & Troubleshooting
+## 6. AtomBit
 
-- **Adding/Switching Models**: Edit `calculator_defs.json` and configure the model name and path.
+- How to use AtomBit has been demonstrated in the main/AtomBit-OMC-l/demo.ipynb.
+- In addition, we also provide the AtomBit-OMC in NPU version in the main/AtomBit-MindSpore.
+
+## 7. FAQ & Troubleshooting
+
+- All benchmark results (large datasets) of MLIPs have been uploaded on "https://huggingface.co/datasets/MUUYUU/OMC-bench".
+- **Adding/Switching Models**: Edit `Calculator_defs.json` and configure the model name and path.
 - **File Format Mismatch/Missing Fields**: Please refer to "Key File Formats" to check your input format and fields.
 - **Task Execution**: Tasks can be run independently or sequentially; if some structures fail or are missing, the scripts will automatically skip them and output a warning/hint.
 
