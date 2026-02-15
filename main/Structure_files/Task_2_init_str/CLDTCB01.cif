@@ -1,0 +1,35 @@
+data_CLDTCB01
+_symmetry_space_group_name_H-M    'P1'
+_symmetry_Int_Tables_number       1
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 x,y,z
+_cell_length_a                   6.3482
+_cell_length_b                   6.0053
+_cell_length_c                   9.3484
+_cell_angle_alpha                90.0
+_cell_angle_beta                 98.713
+_cell_angle_gamma                90.0
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+     1  S          0.41556400       0.06652500       0.11670300
+     2  S          0.58443600       0.56652500       0.38329700
+     3  S          0.58443600       0.93347500       0.88329700
+     4  S          0.41556400       0.43347500       0.61670300
+     5  C          0.66932140       0.08351160       0.05059100
+     6  C          0.33067860       0.58351160       0.44940900
+     7  C          0.33067860       0.91648840       0.94940900
+     8  C          0.66932140       0.41648840       0.55059100
+     9  Cl         0.75231400       0.36076500       0.02361300
+    10  Cl         0.24768600       0.86076500       0.47638700
+    11  Cl         0.24768600       0.63923500       0.97638700
+    12  Cl         0.75231400       0.13923500       0.52361300
+    13  Cl         0.87818400       0.94826500       0.16599300
+    14  Cl         0.12181600       0.44826500       0.33400700
+    15  Cl         0.12181600       0.05173500       0.83400700
+    16  Cl         0.87818400       0.55173500       0.66599300

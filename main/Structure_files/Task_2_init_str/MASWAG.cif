@@ -1,0 +1,33 @@
+data_MASWAG
+_symmetry_space_group_name_H-M    'P1'
+_symmetry_Int_Tables_number       1
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 x,y,z
+_cell_length_a                   4.23836
+_cell_length_b                   7.36551
+_cell_length_c                   7.84861
+_cell_angle_alpha                113.0474
+_cell_angle_beta                 99.6144
+_cell_angle_gamma                93.3654
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+     1  I          0.82947800       0.28716500       0.67842500
+     2  I          0.17052200       0.71283500       0.32157500
+     3  C         -0.03918200       0.45111000       0.54141000
+     4  C          0.03918200       0.54889000       0.45859000
+     5  N          0.62621600       0.08451000       0.89071000
+     6  N          0.37378400       0.91549000       0.10929000
+     7  C          0.61091500       0.88761000       0.84888000
+     8  C          0.38908500       0.11239000       0.15112000
+     9  H          0.68340000       0.80450000       0.74330000
+    10  H          0.31660000       0.19550000       0.25670000
+    11  C          0.48861800       0.80959000       0.96121100
+    12  C          0.51138200       0.19041000       0.03878900
+    13  H          0.48720000       0.67410000       0.93040000
+    14  H          0.51280000       0.32590000       0.06960000

@@ -1,0 +1,35 @@
+data_OCUJOM02
+_symmetry_space_group_name_H-M    'P1'
+_symmetry_Int_Tables_number       1
+loop_
+_symmetry_equiv_pos_site_id
+_symmetry_equiv_pos_as_xyz
+1 x,y,z
+_cell_length_a                   6.19419
+_cell_length_b                   6.1862
+_cell_length_c                   7.3613
+_cell_angle_alpha                90.0
+_cell_angle_beta                 104.902
+_cell_angle_gamma                90.0
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+     1  C          0.88511400       0.47971600       0.01741500
+     2  C          0.11488600      -0.02028400       0.48258500
+     3  C          0.11488600       0.52028400      -0.01741500
+     4  C          0.88511400       0.02028400       0.51741500
+     5  H          0.88214000       0.51411000       0.13913000
+     6  H          0.11786000       0.01411000       0.36087000
+     7  H          0.11786000       0.48589000       0.86087000
+     8  H          0.88214000      -0.01411000       0.63913000
+     9  Cl         0.80933000       0.20674000      -0.01307000
+    10  Cl         0.19067000       0.70674000       0.51307000
+    11  Cl         0.19067000       0.79326000       0.01307000
+    12  Cl         0.80933000       0.29326000       0.48693000
+    13  Cl         0.68463000       0.64314000       0.85643000
+    14  Cl         0.31537000       0.14314000       0.64357000
+    15  Cl         0.31537000       0.35686000       0.14357000
+    16  Cl         0.68463000       0.85686000       0.35643000
