@@ -3,7 +3,7 @@ import numpy as np
 from ast import literal_eval
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from scipy.integrate import simpson
-from scipy.stats import entropy
+from scipy.stats import wasserstein_distance
 from scipy.interpolate import interp1d
 
 
@@ -67,7 +67,7 @@ def calc_scalar_metrics(ref, pred, col):
 
 
 # --------------------------------------------------------------
-# DOS metrics (MAE, RMSE, KL divergence)
+# DOS metrics (MAE, RMSE, Wasserstein distance)
 # --------------------------------------------------------------
 
 def calc_dos_metrics(ref, pred, n_points=1000):
@@ -76,7 +76,7 @@ def calc_dos_metrics(ref, pred, n_points=1000):
     Metrics:
         - MAE (normalized DOS)
         - RMSE (normalized DOS)
-        - KL divergence
+        - Wasserstein distance
 
     Parameters
     ----------
@@ -85,10 +85,10 @@ def calc_dos_metrics(ref, pred, n_points=1000):
 
     Returns
     -------
-    avg_mae, avg_rmse, avg_kl : floats
+    avg_mae, avg_rmse, avg_wd : floats
         Mean DOS metrics across all materials.
     """
-    maes, rmses, kls = [], [], []
+    maes, rmses, wds = [], [], []
 
     for m in ref.index:
         if m not in pred.index:
@@ -131,19 +131,12 @@ def calc_dos_metrics(ref, pred, n_points=1000):
         maes.append(mean_absolute_error(dos_ref_norm, dos_pred_norm))
         rmses.append(np.sqrt(mean_squared_error(dos_ref_norm, dos_pred_norm)))
 
-        # KL divergence (add epsilon for stability)
-        epsilon = 1e-10
-        p = dos_ref_norm + epsilon
-        q = dos_pred_norm + epsilon
-
-        p /= p.sum()
-        q /= q.sum()
-
-        kl = entropy(p, q)
-        kls.append(kl)
+        # Wasserstein distance (1D earth mover distance)
+        wd = wasserstein_distance(freq_common, freq_common, dos_ref_norm, dos_pred_norm)
+        wds.append(wd)
 
     if maes:
-        return np.mean(maes), np.mean(rmses), np.mean(kls)
+        return np.mean(maes), np.mean(rmses), np.mean(wds)
     else:
         return np.nan, np.nan, np.nan
 
@@ -183,19 +176,19 @@ def main(ref_csv, pred_csv):
             "MAE": mae,
             "RMSE": rmse,
             "R2": r2,
-            "KL": np.nan   # KL applies only to DOS
+            "Wasserstein": np.nan   # Wasserstein applies only to DOS
         })
 
     # Evaluate DOS metrics
-    dos_mae, dos_rmse, dos_kl = calc_dos_metrics(ref, pred)
-    print(f"{'DOS(normed)':30s}: MAE={dos_mae:.4f}, RMSE={dos_rmse:.4f}, KL={dos_kl:.4f}")
+    dos_mae, dos_rmse, dos_wd = calc_dos_metrics(ref, pred)
+    print(f"{'DOS(normed)':30s}: MAE={dos_mae:.4f}, RMSE={dos_rmse:.4f}, Wasserstein={dos_wd:.4f}")
 
     results.append({
         "Metric": "DOS(normed)",
         "MAE": dos_mae,
         "RMSE": dos_rmse,
         "R2": np.nan,
-        "KL": dos_kl
+        "Wasserstein": dos_wd
     })
 
     # Save summary

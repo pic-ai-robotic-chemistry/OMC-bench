@@ -70,57 +70,52 @@ def load_results(input_dir, ref_map):
     """
     Load predicted energies from JSON files in `input_dir`.
 
-    Each JSON may provide:
-        - name
-        - polymorph
-        - n_mol
-        - energy_kjmol
-        - energy_eV_cell
-
-    Missing fields are filled using the reference CSV when possible.
+    Notes
+    -----
+    - Iterate over reference names to ensure missing JSONs are captured.
+    - If steps >= 3000 or converged is False, treat as failure (energy_kjmol = None).
+    - If JSON is missing or unreadable, treat as failure (energy_kjmol = None).
 
     Returns:
         summary: polymorph → list of {name, energy_kjmol}
     """
 
     summary = {}
+    ev_to_kjmol = 96.4853
 
-    for fname in os.listdir(input_dir):
-        if not fname.endswith(".json"):
-            continue
+    for name, ref_info in ref_map.items():
+        polymorph = ref_info.get("polymorph")
+        n_mol = ref_info.get("n_mol")
+        json_path = os.path.join(input_dir, f"{name}.json")
 
-        path = os.path.join(input_dir, fname)
+        energy_kjmol = None
 
-        try:
-            data = json.load(open(path))
-        except Exception as e:
-            print(f"[WARNING] Failed to load {fname}: {e}", file=sys.stderr)
-            continue
-
-        name = data.get("name", os.path.splitext(fname)[0])
-        ref_info = ref_map.get(name, {})
-
-        # Determine polymorph (prefer JSON, fallback to reference CSV)
-        polymorph = data.get("polymorph") or ref_info.get("polymorph")
-
-        # Number of molecules per cell
-        n_mol = data.get("n_mol") or ref_info.get("n_mol")
-
-        # Direct kJ/mol energy if available
-        energy_kjmol = data.get("energy_kjmol")
-
-        # Convert from eV/cell → kJ/mol if needed
-        if energy_kjmol is None and "energy_eV_cell" in data and n_mol:
+        if os.path.exists(json_path):
             try:
-                energy_kjmol = float(data["energy_eV_cell"]) * 96.4853 / float(n_mol)
-            except Exception as e:
-                print(f"[WARNING] Failed converting energy for {fname}: {e}")
-                continue
+                with open(json_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
 
-        # If still missing, skip this entry
-        if polymorph is None or energy_kjmol is None:
-            print(f"[INFO] Skipped {fname}: missing polymorph or energy_kjmol", file=sys.stderr)
-            continue
+                steps = data.get("steps", 3000)
+                is_converged = data.get("converged", False)
+
+                if steps is None:
+                    steps = 3000
+
+                if steps >= 3000 or (not is_converged):
+                    energy_kjmol = None
+                else:
+                    if data.get("energy_kjmol") is not None:
+                        energy_kjmol = data.get("energy_kjmol")
+                    elif "energy_eV_cell" in data and n_mol:
+                        try:
+                            n_mol_val = float(n_mol)
+                            if n_mol_val != 0:
+                                energy_kjmol = float(data["energy_eV_cell"]) * ev_to_kjmol / n_mol_val
+                        except Exception:
+                            pass
+            except Exception as e:
+                print(f"[WARNING] Failed to load {json_path}: {e}", file=sys.stderr)
+                energy_kjmol = None
 
         summary.setdefault(polymorph, []).append({
             "name": name,
@@ -139,7 +134,13 @@ def validate_and_sort(summary):
     Sort entries within each polymorph group by energy_kjmol ascending.
     """
     return {
-        poly: sorted(entries, key=lambda x: x["energy_kjmol"])
+        poly: sorted(
+            entries,
+            key=lambda x: (
+                x["energy_kjmol"] if x["energy_kjmol"] is not None else float("inf"),
+                x["name"],
+            ),
+        )
         for poly, entries in summary.items()
     }
 
@@ -150,8 +151,13 @@ def validate_and_sort(summary):
 
 def check_energy_jump(energies, threshold=300):
     """
-    Check if any adjacent energies differ by more than `threshold` kJ/mol.
+    Check if any adjacent energies differ by more than `threshold` kJ/mol,
+    or if any energy is None (treated as failure).
     """
+    for e in energies:
+        if e is None:
+            return True
+
     energies = list(energies)
     for i in range(len(energies) - 1):
         if abs(energies[i + 1] - energies[i]) > threshold:
@@ -292,7 +298,8 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
         if print_to_stdout:
             print(f"== {poly} ==")
             print(f"  computed: {computed_names}")
-            print(f"  energies: {[f'{e:.2f}' for e in computed_energies]}")
+            fmt_energies = [(f"{e:.2f}" if e is not None else "None") for e in computed_energies]
+            print(f"  energies: {fmt_energies}")
             print(f"  expected: {expected}")
             print(f"  match: {match}  (order: {match_order}, jump: {has_big_jump})")
             print(f"  kendall_E={E_k}, D={D}, pairs={total_pairs}, used={n_used}")

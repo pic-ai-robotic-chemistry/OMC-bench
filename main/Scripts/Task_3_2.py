@@ -12,6 +12,7 @@ crystal structure prediction, geometry validation, and MLIP benchmarking.
 """
 
 import os
+import json
 from pathlib import Path
 import pandas as pd
 import argparse
@@ -180,7 +181,7 @@ def batch_rmsd_match(opt_dir, ref_dir, output_csv, ref_suffix=".cif"):
                     "name": prefix,
                     "opt_file": opt_cif.name,
                     "ref_file": ref_cif.name,
-                    "rmsd": 1.0,
+                    "rmsd": 2.0,
                     "matched": False
                 })
 
@@ -191,7 +192,7 @@ def batch_rmsd_match(opt_dir, ref_dir, output_csv, ref_suffix=".cif"):
                 "name": prefix,
                 "opt_file": opt_cif.name,
                 "ref_file": ref_cif.name,
-                "rmsd": 1.0,
+                "rmsd": 2.0,
                 "matched": False
             })
 
@@ -230,6 +231,72 @@ def main():
     print("\n=== Step 2: pymatgen RMSD comparison ===")
     batch_rmsd_match(cif_dir, ref_dir, args.output, args.ref_suffix)
 
+    print("\n=== Step 3: Failure counting (steps >= 3000, rmsd == 2.0, or missing; base 2041) ===")
+    base_total = 2041
+
+    # JSON files are assumed to be in the parent directory of input_dir
+    individual_dir = Path(input_dir).parent
+    json_files = list(individual_dir.glob("*.json"))
+
+    failure_names = set()
+    json_names = set()
+
+    for jpath in json_files:
+        mat = jpath.stem
+        json_names.add(mat)
+
+        try:
+            with open(jpath, "r", encoding="utf-8") as f:
+                content = json.load(f)
+
+            steps = content.get("steps", 3000)
+            is_converged = content.get("converged", False)
+
+            if steps is None:
+                steps = 3000
+
+            if (steps >= 3000) or (not is_converged):
+                failure_names.add(mat)
+
+        except Exception:
+            # If JSON cannot be read, treat as failure
+            failure_names.add(mat)
+
+    # Read RMSD CSV (from step 2)
+    rmsd_names = set()
+    rmsd_failure_names = set()
+    output_csv = Path(args.output)
+    if output_csv.exists():
+        df_rmsd = pd.read_csv(output_csv)
+        if "name" in df_rmsd.columns:
+            name_col = "name"
+        else:
+            name_col = df_rmsd.columns[0]
+
+        for _, row in df_rmsd.iterrows():
+            name = str(row[name_col])
+            rmsd_names.add(name)
+            try:
+                if float(row["rmsd"]) == 2.0:
+                    rmsd_failure_names.add(name)
+            except Exception:
+                # If rmsd is invalid, treat as failure
+                rmsd_failure_names.add(name)
+
+    failure_names.update(rmsd_failure_names)
+
+    # Missing items: if total items in jsons or rows in csv is less than base_total
+    total_json = len(json_names)
+    total_csv = len(rmsd_names)
+    total_items = max(total_json, total_csv)
+    missing_count = max(0, base_total - total_items)
+
+    failure_count = len(failure_names) + missing_count
+
+    print(f"Total JSON items: {total_json}")
+    print(f"Total CSV items: {total_csv}")
+    print(f"Missing items (based on {base_total}): {missing_count}")
+    print(f"Failure count: {failure_count}/{base_total}")
 
 # ======================================================================
 # Entry Point
