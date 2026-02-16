@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-import os
+# -*- coding: utf-8 -*-
+
 import argparse
 import json
+import os
+
 import pandas as pd
 from joblib import Parallel, delayed
 
@@ -13,9 +16,10 @@ except ImportError:
 
 from ase.io import read, write
 from ase.optimize import BFGS
-from Calculator_factory import CalculatorFactory
 # Ensure FrechetCellFilter is correctly imported if needed
 from ase.filters import FrechetCellFilter
+
+from Calculator_factory import CalculatorFactory
 
 
 def parse_args():
@@ -62,7 +66,8 @@ def optimize_one(idx, cif_file, args, ref_infos):
     json_path = os.path.join(indiv_dir, f"{name}.json")
     if os.path.isfile(json_path):
         print(f"[SKIP] {name} exists, skipping.")
-        return json.load(open(json_path))
+        with open(json_path, "r", encoding="utf-8") as f:
+            return json.load(f)
 
     # Determine GPU
     gpu_list = args.gpus

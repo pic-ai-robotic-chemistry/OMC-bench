@@ -205,7 +205,7 @@ if __name__ == "__main__":
     import sys
 
     if len(sys.argv) != 3:
-        print("Usage: python compare_metrics_phonon.py <ref_csv> <pred_csv>")
+        print("Usage: python Task_2_3.py <ref_csv> <pred_csv>")
         exit(1)
 
     main(sys.argv[1], sys.argv[2])

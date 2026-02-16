@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 This script is for Task 1: Evaluate force and stress errors on large systems of Organic molecular crystals.
 The single-point energy is provided when compared in the same level.
@@ -12,15 +14,19 @@ from ase.io import read
 from Calculator_factory import CalculatorFactory
 from joblib import Parallel, delayed
 
+
 def parse_args():
     """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description="Batch predict and evaluate energy (No alignment), force, stress from multi-frame xyz")
+    parser = argparse.ArgumentParser(
+        description="Batch predict and evaluate energy (No alignment), force, stress from multi-frame xyz"
+    )
     parser.add_argument('--xyz_file', required=True, help='Multi-frame xyz file')
     parser.add_argument('--model_name', required=True, help='Model name defined in calculator_defs.json')
     parser.add_argument('--config_json', default='Calculator_defs.json', help='Path to config json')
     parser.add_argument('--output_csv', default='eval_results.csv', help='Path to save result csv')
     parser.add_argument('--n_jobs', type=int, default=4, help='Parallel jobs (default: 4)')
     return parser.parse_args()
+
 
 def stress9_to_voigt6(stress9):
     """
@@ -34,6 +40,7 @@ def stress9_to_voigt6(stress9):
     xz = (stress9[2] + stress9[6]) / 2
     xy = (stress9[1] + stress9[3]) / 2
     return np.array([xx, yy, zz, yz, xz, xy])
+
 
 def evaluate_frame(atoms, calc, idx):
     """Evaluate a single frame: calculate energy, force, stress and compare with reference."""
@@ -87,6 +94,7 @@ def evaluate_frame(atoms, calc, idx):
             "force_rmse": None,
             "n_atoms": len(atoms)
         }
+
 
 def main():
     args = parse_args()

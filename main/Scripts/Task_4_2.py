@@ -17,12 +17,13 @@ Features:
 This script is fully self-contained and can be executed directly.
 """
 
-import os
+from collections import OrderedDict
 import argparse
 import json
+import os
 import sys
+
 import pandas as pd
-from collections import OrderedDict
 
 
 # ============================================================

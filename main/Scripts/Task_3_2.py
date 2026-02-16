@@ -127,7 +127,7 @@ def batch_rmsd_match(opt_dir, ref_dir, output_csv, ref_suffix=".cif"):
     -----
     - pymatgen StructureMatcher is used for structural comparison.
     - If structures match, RMSD is computed.
-    - If they don't match, RMSD is assigned as 1.0 (arbitrary penalty value).
+    - If they don't match, RMSD is assigned as 2.0 (arbitrary penalty value).
     - Results are saved as a sorted CSV (ascending RMSD).
     """
 
@@ -175,7 +175,7 @@ def batch_rmsd_match(opt_dir, ref_dir, output_csv, ref_suffix=".cif"):
 
             else:
                 # If not matching under symmetry / tolerance assumptions
-                print(f"{opt_cif.name} vs {ref_cif.name}: Not matched by StructureMatcher. Assign RMSD = 1.0")
+                print(f"{opt_cif.name} vs {ref_cif.name}: Not matched by StructureMatcher. Assign RMSD = 2.0")
 
                 results.append({
                     "name": prefix,

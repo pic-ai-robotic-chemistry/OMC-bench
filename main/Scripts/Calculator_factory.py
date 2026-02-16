@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import json
 import os
+
 
 class CalculatorFactory:
     @staticmethod
@@ -53,9 +57,9 @@ class CalculatorFactory:
             # D. Load weights into the model
             try:
                 model.load_state_dict(new_state_dict, strict=True)
-                print("✅ Weights loaded successfully!")
+                print("Weights loaded successfully.")
             except RuntimeError as e:
-                print(f"❌ Weight loading failed: {e}")
+                print(f"Weight loading failed: {e}")
                 # If strict=True fails, you can try strict=False
                 # or check whether the config matches the model architecture
                 raise e 

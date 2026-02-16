@@ -136,7 +136,7 @@ def run_phonopy_on_ml_struct(xyz_path, calc, distance=0.01,
         # Remove drift force (important for stable force constants)
         drift = forces.sum(axis=0)
         for f in forces:
-          f -= drift / forces.shape[0]
+            f -= drift / forces.shape[0]
 
         forcesets.append(forces)
 
