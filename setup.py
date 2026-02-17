@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="Omatbench",
+    name="OMC-bench",
     version="0.1.0",
     packages=find_packages(),
     install_requires=[
@@ -15,8 +15,16 @@ setup(
         "pymatgen>=2025.5",
         "matplotlib>=3.10",
         "scikit-learn>=1.6",
+        "joblib>=1.3",
+        "h5py>=3.10",
+        "pyyaml>=6.0",
+        "seekpath>=2.1",
+        "fsspec>=2024.3",
+        "mindspore>=2.2",
         "mace-torch>=0.3.12",
         "torch>=2.6",
+        "torch-geometric>=2.5",
+        "torch-ema>=0.3",
         "e3nn>=0.4",
         "dscribe>=2.1",
         "matscipy>=1.1",
