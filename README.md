@@ -186,7 +186,7 @@ ABC01,-239.1,2,ABC
 
 ## 7. FAQ & Troubleshooting
 
-- Dataset location:
+- Benchmark result location:
 ```
 https://huggingface.co/datasets/MUUYUU/OMC-bench
 ```
