@@ -102,7 +102,8 @@ python Task_2_2.py \
 ```bash
 python Task_2_3.py \
   ../Structure_files/Task_2_ref.csv \
-  ../results/task_2/phonon_results/ml_phonon_summary.csv
+  ../results/task_2/phonon_results/ml_phonon_summary.csv \
+  ../results/task_2/individual_results
 ```
 
 ### Task 3 — Structure Matching
