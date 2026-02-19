@@ -65,6 +65,7 @@ Note: All model configurations are defined in `Calculator_defs.json` and resolve
 
 Example:
 ```bash
+unzip ../Structure_files/Task_1.zip
 python Task_1.py \
   --xyz_file ../Structure_files/Task_1.xyz \
   --model_name atombit_omc \
