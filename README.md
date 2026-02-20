@@ -1,6 +1,6 @@
-# OMC-bench: Machine-Learned Interatomic Potentials for Organic Molecular Crystals
+# OMC-bench and AtomBit-OMC: Benchmarks and MLIPs for Organic Molecular Crystals
 
-This repository provides a benchmark workflow for machine-learned interatomic potentials (MLIPs) on organic molecular crystals (OMCs). It supports multi-GPU and single-GPU execution for structure optimization, phonon/thermodynamics evaluation, structure matching, and polymorph ranking.
+This repository provides a benchmark workflow for machine-learned interatomic potentials (MLIPs) on organic molecular crystals (OMCs) and includes the AtomBit-OMC model code (PyTorch and MindSpore variants), plus data-generation and analysis utilities. It supports multi-GPU and single-GPU execution for structure optimization, phonon/thermodynamics evaluation, structure matching, and polymorph ranking. The full repository layout (including model code, data-generation utilities, and analysis tools) is documented in `main/README.md`.
 
 Project website:
 ```
