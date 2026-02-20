@@ -257,6 +257,9 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
     result = {}
     n_total = 0
     n_match = 0
+    sum_pairs = 0
+    sum_D = 0
+    Ek_list = []
 
     for poly, entries in corrected.items():
 
@@ -280,6 +283,10 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
 
         # Kendall distance
         E_k, D, total_pairs, n_used = kendall_error(computed_names, expected)
+        if E_k is not None:
+            sum_pairs += total_pairs
+            sum_D += D
+            Ek_list.append(E_k)
 
         # Store results
         result[poly] = {
@@ -287,12 +294,7 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
             "computed_energies": computed_energies,
             "expected": expected,
             "match": match,
-            "match_order": match_order,
-            "has_big_jump": has_big_jump,
-            "kendall_E": E_k,
-            "kendall_D": D,
-            "kendall_pairs": total_pairs,
-            "kendall_n_used": n_used
+            "E_kendall": E_k
         }
 
         # Terminal printing
@@ -306,14 +308,18 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
             print(f"  kendall_E={E_k}, D={D}, pairs={total_pairs}, used={n_used}")
             print()
 
-    # Global accuracy
+    # Global accuracy and Kendall summary
     accuracy = n_match / n_total if n_total else None
+    E_kendall_micro = (sum_D / sum_pairs) if sum_pairs > 0 else None
+    E_kendall_macro = (sum(Ek_list) / len(Ek_list)) if Ek_list else None
 
     # Output JSON
     output_json = OrderedDict()
     output_json["accuracy"] = accuracy
     output_json["matched"] = n_match
     output_json["total"] = n_total
+    output_json["E_kendall_micro"] = E_kendall_micro
+    output_json["E_kendall_macro"] = E_kendall_macro
     output_json["details"] = result
 
     with open(path, "w") as f:

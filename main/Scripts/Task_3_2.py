@@ -296,7 +296,8 @@ def main():
     print(f"Total JSON items: {total_json}")
     print(f"Total CSV items: {total_csv}")
     print(f"Missing items (based on {base_total}): {missing_count}")
-    print(f"Failure count: {failure_count}/{base_total}")
+    failure_rate = failure_count / base_total if base_total else 0
+    print(f"Failure rate (P): {failure_rate:.2%} ({failure_count}/{base_total})")
 
 # ======================================================================
 # Entry Point
