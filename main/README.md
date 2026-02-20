@@ -1,4 +1,4 @@
-# OMC-bench: Repository Layout
+# Repository Layout
 
 This `main/` directory contains the full benchmark workflow plus related code, data, and utilities.
 
