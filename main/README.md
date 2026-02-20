@@ -16,5 +16,5 @@ This `main/` directory contains the full benchmark workflow plus related code, d
   MindSpore/NPU training scripts and source.
 - `main/Data_caculation/`
   DFT/phonon input templates and data-generation utilities.
-- `main/mini_tools/`
+- `main/Mini_tools/`
   Small analysis utilities (e.g., SOAP/UMAP/FPS, CSD SMILES, DOE tools).
