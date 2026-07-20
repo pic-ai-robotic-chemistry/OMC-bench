@@ -110,7 +110,9 @@ def main():
         for idx, atoms in enumerate(tqdm(frames))
     )
 
-    os.makedirs(os.path.dirname(args.output_csv), exist_ok=True)
+    output_dir = os.path.dirname(args.output_csv)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     df = pd.DataFrame(per_frame_results)
     df.to_csv(args.output_csv, index=False)
     
@@ -142,3 +144,7 @@ def main():
         print(f"Summary text saved to: {summary_file}")
     except Exception as e:
         print(f"Failed to save summary text: {e}")
+
+
+if __name__ == "__main__":
+    main()

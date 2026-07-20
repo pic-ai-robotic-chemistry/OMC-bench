@@ -101,8 +101,8 @@ def optimize_one(idx, cif_file, args, ref_infos):
         atoms.calc = calc
         sf = FrechetCellFilter(atoms)
         opt = BFGS(sf, logfile=None)
-        opt.run(fmax=args.fmax, steps=args.max_steps)
-        result['converged'] = True
+        converged = opt.run(fmax=args.fmax, steps=args.max_steps)
+        result['converged'] = bool(converged)
         result['steps'] = getattr(opt, 'nsteps', None)
 
         # Write structure
@@ -185,3 +185,7 @@ def main():
                 f.write(n + '\n')
 
     print('Done. Results in', args.output_dir)
+
+
+if __name__ == "__main__":
+    main()

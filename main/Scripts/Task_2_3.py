@@ -17,8 +17,18 @@ PENALTY_VALUES = {
     "omega_max": 20.0,  # THz
     "DOS_WD": 50.0,  # THz (Wasserstein Distance)
     "S_MAE": 200.0,  # J/mol/K
-    "A_MAE": 100.0,  # kJ/mol (unit consistency is user-defined)
+    "A_MAE": 100.0,  # kJ/mol
     "Cv_MAE": 100.0,  # J/mol/K
+}
+
+THERMO_COLS = {
+    "Entropy_300K(J/mol/K)",
+    "Free_energy_300K(kJ/mol)",
+    "Cv_300K(J/mol/K)",
+}
+
+LEGACY_COLUMN_MAP = {
+    "Free_energy_300K(meV)": "Free_energy_300K(kJ/mol)",
 }
 
 
@@ -50,6 +60,7 @@ def load_csv(path):
     """
     print(path)
     df = pd.read_csv(path, converters={"DOS_freq": literal_eval, "DOS": literal_eval})
+    df = df.rename(columns={k: v for k, v in LEGACY_COLUMN_MAP.items() if k in df.columns and v not in df.columns})
     df["Material"] = df["Material"].apply(normalize_name)
     return df.set_index("Material")
 
@@ -67,8 +78,8 @@ def calc_scalar_metrics(ref, pred, col):
     y_true = ref[col].copy()
     y_pred = pred[col].copy()
 
-    # Normalize thermodynamic quantities by atom count Z (if available)
-    if col in {"Entropy_300K(J/mol/K)", "Free_energy_300K(meV)", "Cv_300K(J/mol/K)"}:
+    # Normalize thermodynamic quantities by molecular-unit count Z (if available).
+    if col in THERMO_COLS:
         z_col = None
         for candidate in ("Z", "n_mol"):
             if candidate in ref.columns:
@@ -87,7 +98,7 @@ def calc_scalar_metrics(ref, pred, col):
         penalty = PENALTY_VALUES["omega_max"]
     elif col == "Entropy_300K(J/mol/K)":
         penalty = PENALTY_VALUES["S_MAE"]
-    elif col == "Free_energy_300K(meV)":
+    elif col == "Free_energy_300K(kJ/mol)":
         penalty = PENALTY_VALUES["A_MAE"]
     elif col == "Cv_300K(J/mol/K)":
         penalty = PENALTY_VALUES["Cv_MAE"]
@@ -247,7 +258,7 @@ def main(ref_csv, pred_csv):
     columns = [
         "w_max(THz)",
         "Entropy_300K(J/mol/K)",
-        "Free_energy_300K(meV)",
+        "Free_energy_300K(kJ/mol)",
         "Cv_300K(J/mol/K)"
     ]
 

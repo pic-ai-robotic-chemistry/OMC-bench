@@ -1,10 +1,59 @@
 {
   "mace_mp": {
     "arch": "mace_mp",
-    "path": "MLIP/2023-12-10-mace-128-L0_epoch-199.model"
+    "path": "../MLIPs/2023-12-10-mace-128-L0_epoch-199.model",
+    "dispersion": false
   },
-  "atombit": {
+  "AtomBit-OMC-s": {
     "arch": "atombit",
-    "path": "MLIP/Checkpoints/model_epoch_15.pt"
+    "path": "../AtomBit-OMC/releases/AtomBit-OMC-s/model_epoch_15.pt",
+    "e0_path": "../AtomBit-OMC/releases/meta_e0_data_OMC_r6_single.pt",
+    "add_e0": true,
+    "load_external_e0": false,
+    "pass_e0_to_calculator": true,
+    "pipeline": "total",
+    "precision_dtype": "torch.float32",
+    "cutoff": 6.0,
+    "model_params": {
+      "num_atom_types": 100,
+      "atom_types_map": [1, 5, 6, 7, 8, 9, 15, 16, 17, 35, 53],
+      "hidden_dim": 64,
+      "num_layers": 2,
+      "cutoff": 6.0,
+      "num_rbf": 10,
+      "active_path_preset": "full",
+      "mat_mul_sym_impl": 1,
+      "outer_impl": 1,
+      "gating_impl": 1,
+      "use_L1": true,
+      "use_L2": true,
+      "use_gating": true
+    }
+  },
+  "AtomBit-OMC-l": {
+    "arch": "atombit",
+    "path": "../AtomBit-OMC/releases/AtomBit-OMC-l/model_epoch_15.pt",
+    "e0_path": "../AtomBit-OMC/releases/meta_e0_data_OMC_r6_single.pt",
+    "add_e0": true,
+    "load_external_e0": false,
+    "pass_e0_to_calculator": true,
+    "pipeline": "total",
+    "precision_dtype": "torch.float32",
+    "cutoff": 6.0,
+    "model_params": {
+      "num_atom_types": 100,
+      "atom_types_map": [1, 5, 6, 7, 8, 9, 15, 16, 17, 35, 53],
+      "hidden_dim": 128,
+      "num_layers": 2,
+      "cutoff": 6.0,
+      "num_rbf": 10,
+      "active_path_preset": "full",
+      "mat_mul_sym_impl": 1,
+      "outer_impl": 1,
+      "gating_impl": 1,
+      "use_L1": true,
+      "use_L2": true,
+      "use_gating": true
+    }
   }
 }
