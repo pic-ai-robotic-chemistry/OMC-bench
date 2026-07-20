@@ -1,0 +1,37 @@
+from configs.train.base import make_config
+
+
+CONFIG = make_config(
+    name="omc_gate_on_full_H64_15ep_8gpu",
+    data_dir="/path/to/OMC_dataset_h5_r6_residual_lossless_120w",
+    train_meta="/path/to/OMC_dataset_h5_r6_residual_lossless_120w/train_metadata.pt",
+    test_meta="/path/to/OMC_dataset_h5_r6_residual_lossless_120w/test_metadata.pt",
+    e0_path="/path/to/OMC_dataset_h5_r6_residual_lossless_120w/meta_e0_data_OMC_r6_single.pt",
+    log_dir="/path/to/output/AtomBit-OMC-s",
+    max_cost_per_batch=2500,
+    lr=1e-3,
+    epochs=15,
+    huber_delta=0.01,
+    energy_loss_weight=10.0,
+    force_loss_weight=10.0,
+    stress_loss_weight=10.0,
+    num_workers=4,
+    prefetch_factor=2,
+    init_timeout_minutes=120,
+    seed=42,
+    model_params=dict(
+        num_atom_types=100,
+        atom_types_map=[1, 5, 6, 7, 8, 9, 15, 16, 17, 35, 53],
+        mat_mul_sym_impl=1,
+        outer_impl=1,
+        gating_impl=1,
+        hidden_dim=64,
+        num_layers=2,
+        cutoff=6.0,
+        num_rbf=10,
+        active_path_preset="full",
+        use_L1=True,
+        use_L2=True,
+        use_gating=True,
+    ),
+)

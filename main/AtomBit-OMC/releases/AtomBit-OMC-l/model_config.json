@@ -1,0 +1,21 @@
+{
+  "model": "AtomBit-OMC-l",
+  "checkpoint": "model_epoch_15.pt",
+  "training_dataset": "full OMC training dataset",
+  "epochs": 15,
+  "precision_dtype": "torch.float32",
+  "pipeline": "total",
+  "hidden_dim": 128,
+  "num_layers": 2,
+  "cutoff": 6.0,
+  "num_rbf": 10,
+  "active_path_preset": "full",
+  "atom_types_map": [1, 5, 6, 7, 8, 9, 15, 16, 17, 35, 53],
+  "mat_mul_sym_impl": 1,
+  "outer_impl": 1,
+  "gating_impl": 1,
+  "use_L1": true,
+  "use_L2": true,
+  "use_gating": true,
+  "source_config": "gate_on_full_15ep_8gpu.py"
+}

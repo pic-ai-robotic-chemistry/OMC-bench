@@ -10,7 +10,7 @@ This `main/` directory contains the full benchmark workflow plus related code, d
   Benchmark inputs and reference data (initial structures, reference energies, CIFs).
 - `main/MLIPs/`
   Example/pretrained MLIP model files.
-- `main/AtomBIt-l/`
+- `main/AtomBit-OMC/`
   AtomBit (PyTorch) code and demo notebook.
 - `main/AtomBit-MindSpore/`
   MindSpore/NPU training scripts and source.
@@ -18,3 +18,5 @@ This `main/` directory contains the full benchmark workflow plus related code, d
   DFT/phonon input templates and data-generation utilities.
 - `main/Mini_tools/`
   Small analysis utilities (e.g., SOAP/UMAP/FPS, CSD SMILES, DOE tools).
+
+Reviewer-requested post-hoc analyses added during manuscript revision are organized in the top-level `revision_analyses/` directory.

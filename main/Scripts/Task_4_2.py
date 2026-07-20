@@ -257,6 +257,7 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
     result = {}
     n_total = 0
     n_match = 0
+    n_top1 = 0
     sum_pairs = 0
     sum_D = 0
     Ek_list = []
@@ -281,6 +282,15 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
             n_match += 1
         n_total += 1
 
+        top1_correct = (
+            bool(expected)
+            and bool(computed_names)
+            and computed_names[0] == expected[0]
+            and computed_energies[0] is not None
+        )
+        if top1_correct:
+            n_top1 += 1
+
         # Kendall distance
         E_k, D, total_pairs, n_used = kendall_error(computed_names, expected)
         if E_k is not None:
@@ -294,7 +304,11 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
             "computed_energies": computed_energies,
             "expected": expected,
             "match": match,
-            "E_kendall": E_k
+            "top1_correct": top1_correct,
+            "E_kendall": E_k,
+            "discordant_pairs": D,
+            "total_pairs": total_pairs,
+            "n_used": n_used
         }
 
         # Terminal printing
@@ -312,12 +326,19 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
     accuracy = n_match / n_total if n_total else None
     E_kendall_micro = (sum_D / sum_pairs) if sum_pairs > 0 else None
     E_kendall_macro = (sum(Ek_list) / len(Ek_list)) if Ek_list else None
+    pairwise_correct = ((sum_pairs - sum_D) / sum_pairs) if sum_pairs > 0 else None
 
     # Output JSON
     output_json = OrderedDict()
+    output_json["FRA"] = accuracy
     output_json["accuracy"] = accuracy
     output_json["matched"] = n_match
     output_json["total"] = n_total
+    output_json["top1_correct"] = n_top1
+    output_json["discordant_pairs"] = sum_D
+    output_json["total_pairs"] = sum_pairs
+    output_json["pairwise_correct"] = pairwise_correct
+    output_json["KPE_micro"] = E_kendall_micro
     output_json["E_kendall_micro"] = E_kendall_micro
     output_json["E_kendall_macro"] = E_kendall_macro
     output_json["details"] = result
@@ -325,7 +346,15 @@ def write_compare_with_energy(path, corrected, poly_to_names, print_to_stdout=Tr
     with open(path, "w") as f:
         json.dump(output_json, f, indent=2, ensure_ascii=False)
 
-    print(f"Accuracy: {accuracy:.3f} ({n_match}/{n_total})")
+    if accuracy is None:
+        print("FRA: None (0/0)")
+    else:
+        print(f"FRA: {accuracy:.3f} ({n_match}/{n_total})")
+    print(f"Top-1 correct: {n_top1}/{n_total}")
+    if E_kendall_micro is None:
+        print(f"KPE_micro: None ({sum_D}/{sum_pairs} discordant pairs)")
+    else:
+        print(f"KPE_micro: {E_kendall_micro:.6f} ({sum_D}/{sum_pairs} discordant pairs)")
     print(f"Detailed results saved to {path}")
 
 

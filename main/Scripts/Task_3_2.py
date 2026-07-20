@@ -57,6 +57,15 @@ def parse_args():
         "--ref_suffix", default=".cif",
         help="Suffix for reference CIF files. Default: '.cif'."
     )
+    parser.add_argument(
+        "--json_dir", default=None,
+        help="Directory containing optimization JSON files. If omitted, the script tries "
+             "<input_dir>/../individual_results and then <input_dir>/.. ."
+    )
+    parser.add_argument(
+        "--base_total", type=int, default=None,
+        help="Total number of Task 3 structures. If omitted, this is inferred from ref_dir."
+    )
 
     return parser.parse_args()
 
@@ -231,11 +240,17 @@ def main():
     print("\n=== Step 2: pymatgen RMSD comparison ===")
     batch_rmsd_match(cif_dir, ref_dir, args.output, args.ref_suffix)
 
-    print("\n=== Step 3: Failure counting (steps >= 3000, rmsd == 2.0, or missing; base 2041) ===")
-    base_total = 2041
+    expected_names = {p.stem for p in ref_dir.glob(f"*{args.ref_suffix}")}
+    base_total = args.base_total or len(expected_names)
 
-    # JSON files are assumed to be in the parent directory of input_dir
-    individual_dir = Path(input_dir).parent
+    print(f"\n=== Step 3: Structural-recovery failure counting "
+          f"(steps >= 3000, converged=False, rmsd == 2.0, or missing; base {base_total}) ===")
+
+    if args.json_dir:
+        individual_dir = Path(args.json_dir)
+    else:
+        candidate = Path(input_dir).parent / "individual_results"
+        individual_dir = candidate if candidate.is_dir() else Path(input_dir).parent
     json_files = list(individual_dir.glob("*.json"))
 
     failure_names = set()
@@ -285,19 +300,24 @@ def main():
 
     failure_names.update(rmsd_failure_names)
 
-    # Missing items: if total items in jsons or rows in csv is less than base_total
+    # Missing items are counted at the structure-name level when references are available.
     total_json = len(json_names)
     total_csv = len(rmsd_names)
-    total_items = max(total_json, total_csv)
-    missing_count = max(0, base_total - total_items)
-
-    failure_count = len(failure_names) + missing_count
+    if expected_names:
+        missing_names = expected_names - (json_names | rmsd_names)
+        failure_names.update(missing_names)
+        missing_count = len(missing_names)
+        failure_count = len(failure_names)
+    else:
+        total_items = max(total_json, total_csv)
+        missing_count = max(0, base_total - total_items)
+        failure_count = len(failure_names) + missing_count
 
     print(f"Total JSON items: {total_json}")
     print(f"Total CSV items: {total_csv}")
     print(f"Missing items (based on {base_total}): {missing_count}")
     failure_rate = failure_count / base_total if base_total else 0
-    print(f"Failure rate (P): {failure_rate:.2%} ({failure_count}/{base_total})")
+    print(f"Structural-recovery failure rate (P): {failure_rate:.2%} ({failure_count}/{base_total})")
 
 # ======================================================================
 # Entry Point
