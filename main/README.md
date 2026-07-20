@@ -18,5 +18,3 @@ This `main/` directory contains the full benchmark workflow plus related code, d
   DFT/phonon input templates and data-generation utilities.
 - `main/Mini_tools/`
   Small analysis utilities (e.g., SOAP/UMAP/FPS, CSD SMILES, DOE tools).
-
-Reviewer-requested post-hoc analyses added during manuscript revision are organized in the top-level `revision_analyses/` directory.

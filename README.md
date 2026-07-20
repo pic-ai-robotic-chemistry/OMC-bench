@@ -15,8 +15,7 @@ https://aisci.ustc.edu.cn/mlip-omcs/#/
 4. Task Instructions
 5. Key File Formats
 6. AtomBit Notes
-7. Revision Analyses
-8. FAQ & Troubleshooting
+7. FAQ & Troubleshooting
 
 ---
 
@@ -197,13 +196,7 @@ ABC01,-239.1,2,ABC
 
 ---
 
-## 7. Revision Analyses
-
-Reviewer-requested post-hoc analyses are organized under `revision_analyses/`. These scripts are not required for running the four benchmark tasks, but document analyses added during manuscript revision, such as UMA overlap stratification, Task 1 RMSE aggregation, Task 4 practical KPE statistics, MACE-MPA fine-tuning summaries, AtomBit ablations, gate-saliency diagnostics, and finite-temperature MD validation.
-
----
-
-## 8. FAQ & Troubleshooting
+## 7. FAQ & Troubleshooting
 
 - Benchmark result location:
 ```
