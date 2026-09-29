@@ -10,7 +10,7 @@ https://aisci.ustc.edu.cn/mlip-omcs/#/
 OMC-train access:
 ```
 https://www.ccdc.cam.ac.uk/support-and-resources/downloads/
-<CSD OMC MLIP Collection>
+Click Datasets/CSD OMC MLIP Collection
 ```
 
 ## Table of Contents
