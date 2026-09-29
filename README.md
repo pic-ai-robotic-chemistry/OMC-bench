@@ -7,6 +7,12 @@ Project website:
 https://aisci.ustc.edu.cn/mlip-omcs/#/
 ```
 
+OMC-train access:
+```
+https://www.ccdc.cam.ac.uk/support-and-resources/downloads/
+<CSD OMC MLIP Collection>
+```
+
 ## Table of Contents
 
 1. Project Overview
